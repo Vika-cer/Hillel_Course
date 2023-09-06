@@ -1,0 +1,45 @@
+using System;
+//2) Необхідно написати консольну програму, де користувач вводитиме з клавіатури 2 числа.
+//Числа будуть порівнюватися з наступним виведенням в консоль результату цього порівняння
+//(чи рівні значення, а якщо ні, яке число більше/менше).
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num1 = OutputNumber("Write number 1 :");
+            int num2 = OutputNumber("Write number 2 :");
+            Programm(num1, num2);
+            Console.ReadKey();
+        }
+        static int OutputNumber(string message)
+        {
+            Console.Write(message);
+            string input = Console.ReadLine();
+            bool resParse = int.TryParse(input, out int result);
+            if(!resParse)
+            {
+                Console.WriteLine("Error");
+                return -1000;
+            }
+            return result;
+        }
+        static void Programm(int num1, int num2)
+        {
+            if (num1 == num2)
+            {
+                Console.WriteLine("Same number");
+            }
+            else if(num1 > num2)
+            {
+                Console.WriteLine("number 1 is greater than number 2");
+            }
+            else
+            {
+                Console.WriteLine("number 2 is greater than number 1");
+            }
+        }
+    }
+
+}
