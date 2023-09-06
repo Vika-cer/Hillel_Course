@@ -1,0 +1,40 @@
+using System;
+//1) Написати програму, яка перевіряє введене число на парність/непарність.
+//13-> "непарне"
+//22-> "парне"
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num1 = OutputNumber("Write number:");
+            Programm(num1);
+            Console.ReadKey();
+        }
+        static int OutputNumber(string message)
+        {
+            Console.Write(message);
+            string input = Console.ReadLine();
+            bool resParse = int.TryParse(input, out int result);
+            if(!resParse)
+            {
+                Console.WriteLine("Error");
+                return -1000;
+            }
+            return result;
+        }
+        static void Programm(int num1)
+        {
+            if (num1 % 2 == 0)
+            {
+                Console.WriteLine("the number is a pair");
+            }
+            else
+            {
+                Console.WriteLine("number - unpaired");
+            }
+        }
+    }
+
+}
