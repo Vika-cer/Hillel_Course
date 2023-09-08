@@ -1,58 +1,49 @@
 using System;
-//3) Написати програму, яка виводить назву дня неділі за його номером (1 - понеділок, 7 - неділя)
-namespace project
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int day = OutputNumber("Write the day 1-7 :");
-            Programm(day);
-            Console.ReadKey();
-        }
-        static int OutputNumber(string message)
-        {
-            int result;
-            bool resParse = false;
-            do
-            {
-                Console.Write(message);
-                string input = Console.ReadLine();
-                resParse = int.TryParse(input, out result);
-            }
-            while (!resParse || result < 1 || result > 7);
-            return result;
-
-        }
-        static void Programm(int day)
-        {
-            switch (day)
-            {
-                case 1:
-                    Console.WriteLine("Monday");
-                    break;
-                case 2:
-                    Console.WriteLine("Tuesday");
-                    break;
-                case 3:
-                    Console.WriteLine("Wednesday");
-                    break;
-                case 4:
-                    Console.WriteLine("Thursday");
-                    break;
-                case 5:
-                    Console.WriteLine("Friday");
-                    break;
-                case 6:
-                    Console.WriteLine("Saturday");
-                    break;
-                case 7:
-                    Console.WriteLine("Sunday");
-                    break;
-                default:
-                    Console.WriteLine("Error");
-                    break;
-            }
-        }
-    }
-}
+ //Напишіть програму, яка приймає від користувача число від 1 до 100.
+ //При цьому якщо число кратне трьом, програма повинна виводити слово Fizz, а якщо кратно п'яти - слово Buzz.
+ //Якщо число кратно п'ятнадцяти, програма повинна виводити слово FizzBuzz.
+ //Завдання може здатися очевидним, але потрібно отримати найбільш просте та красиве рішення.
+ namespace project
+ {
+     class Program
+     {
+         static void Main(string[] args)
+         {
+             int number = OutputNumber("Write number 1 - 100 :");
+             Programm(number);
+             Console.ReadKey();
+         }
+         static int OutputNumber(string message)
+         {
+             int result;
+             bool resParse = false;
+             do
+             {
+                 Console.Write(message);
+                 string input = Console.ReadLine();
+                 resParse = int.TryParse(input, out result);
+             }
+             while (!resParse || result < 1 || result > 100);
+             return result;
+         }
+         static void Programm(int number)
+         {
+             if (number % 15 == 0)
+             {
+                 Console.WriteLine("FizzBuzz");
+             }
+             else if (number % 5 == 0)
+             {
+                 Console.WriteLine("Buzz");
+             }
+             else if (number % 3 == 0)
+             {
+                 Console.WriteLine("Fizz");
+             }
+             else
+             {
+                 Console.WriteLine("Nothing");
+             }
+         }
+     }
+ }
