@@ -12,14 +12,15 @@ namespace project
         }
         static int OutputNumber(string message)
         {
-            int result = 0;
+            int result;
+            bool resParse = false;
             do
             {
                 Console.Write(message);
                 string input = Console.ReadLine();
-                result = int.Parse(input);
+                resParse = int.TryParse(input, out result);
             }
-            while (result < 1 || result > 7);
+            while (!resParse || result < 1 || result > 7);
             return result;
 
         }
