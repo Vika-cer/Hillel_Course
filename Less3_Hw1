@@ -14,14 +14,15 @@ namespace project
         }
         static int OutputNumber(string message)
         {
-            Console.Write(message);
-            string input = Console.ReadLine();
-            bool resParse = int.TryParse(input, out int result);
-            if(!resParse)
+            int result;
+            bool resParse = false;
+            do
             {
-                Console.WriteLine("Error");
-                return -1000;
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out result);
             }
+            while (!resParse);
             return result;
         }
         static void Programm(int num1)
@@ -36,5 +37,5 @@ namespace project
             }
         }
     }
-
+}
 }
