@@ -14,13 +14,14 @@ namespace project
         }
         static int OutputNumber(string message)
         {
-            Console.Write(message);
-            string input = Console.ReadLine();
-            bool resParse = int.TryParse(input, out int result);
-            if(!resParse)
-            { 
-                return -1000;
+            int result = 0;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                result = int.Parse(input);
             }
+            while (result < 1 || result > 12);
             return result;
         }
         static void Programm(int month)
@@ -47,5 +48,4 @@ namespace project
             }
         }
     }
-
 }
