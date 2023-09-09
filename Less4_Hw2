@@ -1,0 +1,53 @@
+using System;
+//2) Програма загадує число від 1 до 146 (привіт, Random).
+//Користувач намагається вгадати його.
+//У разі неправильної відповіді програма підказує «більше» або «менше»
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int getNum = random.Next(1, 146);
+            Console.WriteLine(getNum);
+            Comparison(getNum);
+            Console.ReadKey();
+        }
+
+        static void Comparison(int getNum)
+        {
+            int userNum;
+            do
+            {
+                userNum = OutputNumber("Write the number 1-146 :");
+                if(userNum < getNum)
+                {
+                    Console.WriteLine("Your number is less than random");
+
+                }
+                else if(userNum > getNum)
+                {
+                    Console.WriteLine("Your number is greater than random");
+                }
+            }
+            while (userNum != getNum);
+            Console.WriteLine("You guessed the number!");
+        }
+
+        static int OutputNumber(string message)
+        {
+            int result;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out result);
+            }
+            while (!resParse || result < 1 || result > 146);
+            return result;
+
+        }
+    }
+}
