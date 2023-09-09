@@ -1,0 +1,31 @@
+using System;
+//1) Напишіть програму, яка «запитуватиме» правильний пароль, доки він не буде введений.
+//Правильний пароль нехай буде "root". Якщо пароль неправильний, програма повинна сказати "Неправильний пароль!"
+
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Password("Write the password: ");
+            Console.ReadKey();
+        }
+        static string Password (string message)
+        {
+            string key;
+            do
+            {
+                Console.Write(message);
+                key = Console.ReadLine();
+                if(key != "root")
+                {
+                    Console.WriteLine("Incorrect password!");
+                }
+
+            }
+            while (key != "root");
+            return key;
+        }
+    }
+}
