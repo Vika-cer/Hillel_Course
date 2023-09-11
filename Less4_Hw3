@@ -1,0 +1,43 @@
+using System;
+//Чи є число простим
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int getNum = random.Next(1, 1000);
+            Console.WriteLine(getNum);
+            bool result = Cheking(getNum);
+            OutputResult(result);
+            Console.ReadKey();
+        }
+
+        private static void OutputResult(bool result)
+        {
+            if (!result)
+            {
+                Console.WriteLine("Not Simple");
+            }
+            else
+            {
+                Console.WriteLine("Simple");
+            }
+        }
+
+        static bool Cheking(int getNum)
+        {
+            bool check = true;
+            for (int i = 2; i < Math.Sqrt(getNum); i++)
+            {
+                if (getNum % i == 0)
+                {
+                    return !check;
+                    break;
+                }
+            }
+            return check;
+        }
+    }
+}
