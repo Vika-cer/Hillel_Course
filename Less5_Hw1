@@ -1,0 +1,48 @@
+using System;
+//1) Потрібно додати до масиву елемент на початок. 
+//Масив заповнити рандомними числами. Той елемент, що потрібно додати, також взяти рандомно.
+//Зробити методи, які в якості параметру приймають масив
+//(вивід на екран, заповнення масиву елементами, додавання елементу на початок).
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = CountOfNumMass("How long do you want array (write 1-30): ");
+            int[] array = new int[count];
+            Random random = new Random();
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = random.Next(0, 50);
+                Console.WriteLine(array[i]);
+            }
+            Console.WriteLine();
+            int add = random.Next(0, 50);
+            int[] newArray = new int[array.Length + 1];
+            newArray[0] = add;
+            Console.WriteLine(newArray[0]);
+            for (int i = 1; i < newArray.Length; i++)
+            {
+                newArray[i] = array[i - 1];
+                Console.WriteLine(newArray[i]);
+                
+            }
+            Console.ReadKey();
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
