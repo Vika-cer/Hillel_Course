@@ -10,25 +10,44 @@ namespace project
         static void Main(string[] args)
         {
             int count = CountOfNumMass("How long do you want array (write 1-30): ");
-            int[] array = new int[count];
-            Random random = new Random();
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = random.Next(0, 50);
-                Console.WriteLine(array[i]);
-            }
+            int[] array = CreateArray(count);
             Console.WriteLine();
+            AddNumToTheBegining(array);
+            Console.ReadKey();
+        }
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static void AddNumToTheBegining(int[] array)
+        {
+            Random random = new Random();
             int add = random.Next(0, 50);
             int[] newArray = new int[array.Length + 1];
             newArray[0] = add;
-            Console.WriteLine(newArray[0]);
             for (int i = 1; i < newArray.Length; i++)
             {
                 newArray[i] = array[i - 1];
-                Console.WriteLine(newArray[i]);
-                
+
             }
-            Console.ReadKey();
+            ConsoleWritingMethod(newArray);
+        }
+
+        private static int[] CreateArray(int count)
+        {
+            Random random = new Random();
+            int[] arrayForMethod = new int[count];
+            for (int i = 0; i < arrayForMethod.Length; i++)
+            {
+                arrayForMethod[i] = random.Next(0, 50);
+            }
+            ConsoleWritingMethod(arrayForMethod);
+            return arrayForMethod;
         }
 
         private static int CountOfNumMass(string message)
