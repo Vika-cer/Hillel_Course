@@ -1,0 +1,68 @@
+using System;
+//2) Написати програму, яка виводить всі елементи масиву доки не зустрінеться елемент -1.
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = CountOfNumMass("How long do you want array (write 1-30): ");
+            int[] array = CreateArray(count);
+            Console.WriteLine("Correct program: ");
+            OutputWhileNotRightNum(array);       
+            Console.ReadKey();
+        }
+
+        private static void OutputWhileNotRightNum(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == -1)
+                {
+                    Console.WriteLine(array[i]);
+                    break;
+                }
+                Console.WriteLine(array[i]);
+            }
+        }
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static int[] CreateArray(int count)
+        {
+            Random random = new Random();
+            int[] arrayForMethod = new int[count];
+            int number = -1;
+            arrayForMethod[random.Next(0, count++)] = number;
+            for (int i = 0; i < arrayForMethod.Length; i++)
+            {
+                if (arrayForMethod[i] != -1)
+                {
+                    arrayForMethod[i] = random.Next(0, 50);
+                }
+            }
+            ConsoleWritingMethod(arrayForMethod);
+            return arrayForMethod;
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
