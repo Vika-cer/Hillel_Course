@@ -1,0 +1,76 @@
+using System;
+//3) Написати програму створення масиву із двох масивів. У підсумковому масиві мають бути елементи першого та другого масиву.
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int countArray1 = CountOfNumMass("How long do you want array (write 1-30): ");
+            Console.WriteLine();
+            int countArray2 = CountOfNumMass("How long do you want array (write 1-30): ");
+            int[] array1 = CreateArray(countArray1);
+            int[] array2 = CreateArray(countArray2);
+            Console.WriteLine("Correct program: ");
+            CreatingOneArray(array1, array2);       
+            Console.ReadKey();
+        }
+
+        private static void CreatingOneArray(int[] array1, int[] array2)
+        {
+            int lengthOfTwoArray = array1.Length + array2.Length;
+            int[] oneArray = new int[lengthOfTwoArray];
+            for (int i = 0; i < lengthOfTwoArray; i++)
+            {
+                if (i > array1.Length - 1)
+                {
+                    oneArray[i] = array2[i - array1.Length];
+                }
+                else
+                {
+                    oneArray[i] = array1[i];
+                }
+            }
+            ConsoleWritingMethod(oneArray);
+        }
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static int[] CreateArray(int count)
+        {
+            Random random = new Random();
+            int[] arrayForMethod = new int[count];
+            int number = -1;
+            arrayForMethod[random.Next(0, count++)] = number;
+            for (int i = 0; i < arrayForMethod.Length; i++)
+            {
+                if (arrayForMethod[i] != -1)
+                {
+                    arrayForMethod[i] = random.Next(0, 50);
+                }
+            }
+            ConsoleWritingMethod(arrayForMethod);
+            return arrayForMethod;
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
