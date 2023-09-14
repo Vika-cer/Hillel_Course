@@ -1,0 +1,89 @@
+using System;
+//4) Написати програму, в якій з масиву видаляється один елемент з позиції, яку вводить користувач. 
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int longArray = CountOfNumMass("How long do you want array (write 1-30): ");
+            int[] array1 = CreateArray(longArray);
+            int delNumbOfArr= WritingNumberThatDel("What number of array you want to delete: ",longArray);
+            Console.WriteLine("Correct program: ");
+            int[] array2 = DoNewLessArray(array1);
+            array2 = CellDeletion(array1, array2, delNumbOfArr);
+            ConsoleWritingMethod(array2);
+            Console.ReadKey();
+        }
+
+        private static int[] CellDeletion(int[] array1, int[] array2, int delNumbOfArr)
+        {
+            for (int i = 0; i < array2.Length; i++)
+            {
+                if (i < delNumbOfArr - 1)
+                {
+                    array2[i] = array1[i];
+                }
+                else
+                {
+                    array2[i] = array1[i + 1];
+                }
+            }
+            return array2;
+        }
+
+        private static int[] DoNewLessArray(int[] array1)
+        {
+            int[] newArr = new int[array1.Length - 1];
+            return newArr;
+        }
+
+        private static int WritingNumberThatDel(string message,int longArray)
+        {
+            int number;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out number);
+            }
+            while (!resParse || number < 1 || number > longArray);
+            return number;
+        }
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static int[] CreateArray(int count)
+        {
+            Random random = new Random();
+            int[] arrayForMethod = new int[count];
+            for (int i = 0; i < arrayForMethod.Length; i++)
+            {
+                arrayForMethod[i] = random.Next(0, 50);
+            }
+            ConsoleWritingMethod(arrayForMethod);
+            return arrayForMethod;
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
