@@ -46,14 +46,9 @@ namespace project
         {
             Random random = new Random();
             int[] arrayForMethod = new int[count];
-            int number = -1;
-            arrayForMethod[random.Next(0, count++)] = number;
             for (int i = 0; i < arrayForMethod.Length; i++)
             {
-                if (arrayForMethod[i] != -1)
-                {
-                    arrayForMethod[i] = random.Next(0, 50);
-                }
+                arrayForMethod[i] = random.Next(0, 50);
             }
             ConsoleWritingMethod(arrayForMethod);
             return arrayForMethod;
