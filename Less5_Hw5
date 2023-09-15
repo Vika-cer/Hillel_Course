@@ -1,0 +1,90 @@
+using System;
+//Вказано п'ять довільних цілих чисел (елементи масиву).
+//Визначити, чи є їхнє розташування в масиві впорядкованим (тобто за зростанням або за спаданням) чи невпорядкованим.
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array1 = new int[5];
+            CreateArray(array1);
+            ConsoleWritingMethod(array1);
+            DefineSorting(array1);
+            Console.ReadKey();
+        }
+
+        private static void DefineSorting(int[] array1)
+        {
+            bool countGrowth = true, countFall = true;
+            for (int i = 0; i < array1.Length - 1; i++)
+            {
+                if (array1[i] > array1[i + 1])
+                {
+                    countGrowth = false;
+                }
+                else if (array1[i] < array1[i + 1])
+                {
+                    countFall = false;
+                }
+
+            }
+            WritingTheResultOfSorting(countFall, countGrowth);
+        }
+
+        private static void WritingTheResultOfSorting(bool countFall, bool countGrowth)
+        {
+            if (countGrowth)
+            {
+                Console.WriteLine("The solution is sorted by growth");
+            }
+            else if (countFall)
+            {
+                Console.WriteLine("The solution is sorted in descending order");
+            }
+            else
+            {
+                Console.WriteLine("The solution is unordered");
+            }
+        }
+
+        private static int[] CreateArray(int[] array)
+        {
+            #region рандомний масив
+            //Random random = new Random();
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    array[i] = random.Next(1, 50);
+            //}
+            //return array;
+            #endregion
+            #region масив зі зростанням
+            //array[0] = 5;
+            //array[1] = 7;
+            //array[2] = 15;
+            //array[3] = 37;
+            //array[4] = 50;
+            //return array;
+            #endregion
+            #region
+            array[0] = 60;
+            array[1] = 3;
+            array[2] = 0;
+            array[3] = -37;
+            array[4] = -50;
+            return array;
+            #endregion
+
+
+        }
+
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+    }
+}
