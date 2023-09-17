@@ -1,0 +1,74 @@
+using System;
+//2) Знайти добуток елементів масиву, які більші за задане число.
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = CountOfNumMass("How long do you want array (write 1-30): ");
+            int[] array = CreateArray(count);
+            int numbLim = NumberLimited("What number limited is? (- 10 - +10) ");
+            ProductOfNumbers(array, numbLim);
+            Console.ReadKey();
+        }
+
+        private static void ProductOfNumbers(int[] array, int numbLim)
+        {
+            int prod = 1;
+            for (int i = 0; i < array.Length; i++)
+            {
+                _ = array[i] > numbLim ? prod *= array[i] : prod = prod;
+            }
+            Console.WriteLine($"Product of numbers is {prod}");
+        }
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static int[] CreateArray(int count)
+        {
+            Random random = new Random();
+            int[] arrayForMethod = new int[count];
+            for (int i = 0; i < arrayForMethod.Length; i++)
+            {
+                arrayForMethod[i] = random.Next(-10, 11);
+            }
+            ConsoleWritingMethod(arrayForMethod);
+            return arrayForMethod;
+        }
+
+        private static int NumberLimited (string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < -10 || count > 10);
+            return count;
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
