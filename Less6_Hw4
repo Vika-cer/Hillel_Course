@@ -1,0 +1,76 @@
+using System;
+//4) Відсортуйте введений список прізвищ за алфавітом та виведіть його на екран.
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8; 
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            int count = CountOfNumMass("How long do you want array (write 1-30): ");
+            string[] surnames = new string[count];
+            FilingOfSurnamesArray(surnames);
+            SortMethod(surnames);
+            Console.ReadKey();
+        }
+
+        private static void SortMethod(string[] surnames)
+        {
+            Array.Sort(surnames);
+            Console.WriteLine("Sorted surnames:");
+            ConsoleWritingMethod(surnames);
+        }
+
+        private static void FilingOfSurnamesArray(string[] surnames)
+        {
+            for (int i = 0; i < surnames.Length; i++)
+            {
+                surnames[i] = DataOfSurname($"Enter surname {i + 1}: ");
+            }
+        }
+
+        private static string DataOfSurname(string message)
+        {
+            string surname = "";
+            bool resParse = false;
+
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = !string.IsNullOrWhiteSpace(input);
+                if (resParse)
+                {
+                    surname = input;
+                }
+            }
+            while (!resParse);
+
+            return surname;
+        }
+
+
+        private static void ConsoleWritingMethod(string[] array)
+        {
+            foreach (string element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
