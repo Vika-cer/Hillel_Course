@@ -1,0 +1,62 @@
+using System;
+//1) Знайти суму елементів масиву, які розміщуються на парних індексах
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = CountOfNumMass("How long do you want array (write 1-30): ");
+            int[] array = CreateArray(count);
+            SumOfTheElement(array);
+            Console.ReadKey();
+        }
+
+        private static void SumOfTheElement(int[] array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if(i % 2 == 0)
+                {
+                    sum += array[i]; 
+                }
+            }
+            Console.WriteLine($"Sum is {sum}");
+        }
+
+        private static void ConsoleWritingMethod(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        private static int[] CreateArray(int count)
+        {
+            Random random = new Random();
+            int[] arrayForMethod = new int[count];
+            for (int i = 0; i < arrayForMethod.Length; i++)
+            {
+                arrayForMethod[i] = random.Next(0, 50);
+            }
+            ConsoleWritingMethod(arrayForMethod);
+            return arrayForMethod;
+        }
+
+        private static int CountOfNumMass(string message)
+        {
+            int count;
+            bool resParse = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out count);
+            }
+            while (!resParse || count < 1 || count > 30);
+            return count;
+        }
+    }
+}
