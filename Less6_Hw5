@@ -1,0 +1,206 @@
+using System;
+
+namespace project
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            int count = ReadNumberOfMarks("How many marks in each subject (write 1-20): ");
+            int[,] estimates = new int[4, count];
+            CheckFillingOfArray(estimates);
+            Console.WriteLine("You fill all grades!");
+            ConsoleMenuOfActions(estimates);
+            Console.ReadKey();
+        }
+
+        private static void ConsoleMenuOfActions(int[,] estimates)
+        {
+            bool exit = false;
+            do
+            {
+                Console.WriteLine(@"Choose what you want to see:
+                1. Average score in mathematics
+                2. Average score in Ukrainian language
+                3. Average score in English 
+                4. Average score in history
+                5. Average grade in all subjects");
+                int choice = ReadChoice1("Write the number: ");
+                if (choice != 5)
+                    AverageItemScore(estimates, choice);
+                else
+                    AverageItemScoreOfAll(estimates, choice);
+                exit = MethodOfExit(@"Do yoy want to know smth else:
+                       1 - Yes
+                       2 - No
+                       Write the num: ");
+            }
+            while (!exit);
+
+        }
+
+        private static bool MethodOfExit(string message)
+        {
+            int answer;
+            bool isValidInput = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                isValidInput = int.TryParse(input, out answer);
+            }
+            while (!isValidInput || answer < 1 || answer > 2);
+            bool exit = DoYouWantToExit(answer);
+            return exit;
+         }
+
+        private static bool DoYouWantToExit(int answer)
+        {
+            if (answer == 1)
+                return true;
+            else
+                return false;
+        }
+
+        private static void AverageItemScoreOfAll(int[,] estimates, int choice)
+        {
+            int lenghtOfAllArr = estimates.Length;
+            int sum = 0;
+            for (int i = 0; i < estimates.GetLength(0); i++)
+            {
+                for (int j = 0; j < estimates.GetLength(1); j++)
+                {
+                    sum += estimates[i, j];
+                }
+            }
+            Console.WriteLine($"Your average item score is {(double)sum / lenghtOfAllArr}");
+        }
+
+        private static void AverageItemScore(int[,] estimates, int choice)
+        {
+            int lenghtOfArr = estimates.GetLength(1);
+            int sum = 0;
+            for (int i = 0; i < lenghtOfArr; i++)
+            {
+                sum += estimates[choice - 1, i];
+            }
+            Console.WriteLine($"Your average item score is {(double) sum / lenghtOfArr}");
+        }
+
+        private static void CheckFillingOfArray(int[,] estimates)
+        {
+            bool isAllGradesFilled = false;
+
+            while (!isAllGradesFilled)
+            {
+                ConsoleMenu(estimates);
+                isAllGradesFilled = IsAllGradesFilled(estimates);
+            }
+        }
+        #region Консоль заполнение оценок
+        private static void ConsoleMenu(int[,] estimates)
+        {
+            Console.WriteLine(@"Choose what you want to do:
+                1. Fill out math assessments
+                2. Fill out Ukrainian language assessment
+                3. Complete English assessments
+                4. Complete history assessments");
+            int choice = ReadChoice("Write the number: ");
+            FillGrades(estimates, choice);
+        }
+        #endregion
+
+        #region Заполнение оценок
+        private static void FillGrades(int[,] estimates, int subject)
+        {
+            for (int i = 0; i < estimates.GetLength(1); i++)
+            {
+                estimates[subject - 1, i] = ReadGrade($"Write your grades for this subject: ");
+            }
+        }
+        #endregion
+
+        #region ChekNumCons1
+        private static int ReadChoice(string message)
+        {
+            int choice;
+            bool isValidInput = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                isValidInput = int.TryParse(input, out choice);
+            }
+            while (!isValidInput || choice < 1 || choice > 4);
+            return choice;
+        }
+        #endregion
+
+        #region ChekNumCons2
+        private static int ReadChoice1(string message)
+        {
+            int choice;
+            bool isValidInput = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                isValidInput = int.TryParse(input, out choice);
+            }
+            while (!isValidInput || choice < 1 || choice > 5);
+            return choice;
+        }
+        #endregion
+
+        #region Оценка 1-12?
+        private static int ReadGrade(string message)
+        {
+            int grade;
+            bool isValidInput = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                isValidInput = int.TryParse(input, out grade);
+            }
+            while (!isValidInput || grade < 1 || grade > 12);
+            return grade;
+        }
+        #endregion
+
+        #region Количество оценок
+        private static int ReadNumberOfMarks(string message)
+        {
+            int count;
+            bool isValidInput = false;
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                isValidInput = int.TryParse(input, out count);
+            }
+            while (!isValidInput || count < 1 || count > 20);
+            return count;
+        }
+        #endregion
+
+        #region Проверка массива 
+        private static bool IsAllGradesFilled(int[,] estimates)
+        {
+            for (int i = 0; i < estimates.GetLength(0); i++)
+            {
+                for (int j = 0; j < estimates.GetLength(1); j++)
+                {
+                    if (estimates[i, j] == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        #endregion
+
+    }
+}
