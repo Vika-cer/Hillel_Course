@@ -28,7 +28,7 @@ namespace Enum
                 Console.Write(message);
                 string input = Console.ReadLine();
 
-                if (System.Enum.TryParse(input, true, out operation) && operation != Operation.None)
+                if (System.Enum.TryParse(input, true, out operation) && operation < Operation.None && operation >= Operation.Add)
                 {
                     return operation;
                 }
