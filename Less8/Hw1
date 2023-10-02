@@ -1,0 +1,280 @@
+// тут є і метод отримання даних, і через set; я спеціально не обʼєднувала: щоб програміст міг і самостійно ввсети значення у коді.
+
+namespace OOP
+{
+    internal class Address
+    {
+        private string message = "Nothing";
+        private int index;
+        public int Index
+        {
+            get
+            {
+                if (index >= 1111 && index <= 9999)
+                {
+                    return index;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (value >= 1111 && value <= 9999)
+                {
+                    index = value;
+                }
+                else
+                {
+                    index = 0000;
+                }
+            }
+        }
+
+        private string country = " ";
+        public string Country
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(country))
+                {
+                    return country;
+                }
+                else
+                {
+                    return message;
+                }
+            }
+            set
+            {
+                country = value;
+            }
+        }
+
+        private string city = " ";
+        public string City
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(city))
+                {
+                    return city;
+                }
+                else
+                {
+                    return message;
+                }
+            }
+            set
+            {
+                city = value;
+            }
+        }
+
+        private string street = " ";
+        public string Street
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(street))
+                {
+                    return street;
+                }
+                else
+                {
+                    return message;
+                }
+            }
+            set
+            {
+                street = value;
+            }
+        }
+
+        private int house;
+        public int House
+        {
+            get
+            {
+                if (house >= 1 && house <= 400)
+                {
+                    return house;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (value >= 1 && value <= 400)
+                {
+                    house = value;
+                }
+                else
+                {
+                    house = 000; 
+                }
+            }
+        }
+
+        private int apartment;
+        public int Apartment
+        {
+            get
+            {
+                if (apartment >= 1 && apartment <= 150)
+                {
+                    return apartment;
+                }
+                else
+                {
+                    return 0; 
+                }
+            }
+            set
+            {
+                if (value >= 1 && value <= 150)
+                {
+                    apartment = value;
+                }
+                else
+                {
+                    apartment = 000; 
+                }
+            }
+        }
+        private void GetYourCountry()
+        {
+            bool resParse = false;
+
+            do
+            {
+                Console.Write("Write your country: ");
+                string input = Console.ReadLine();
+                resParse = !string.IsNullOrWhiteSpace(input);
+                if (resParse)
+                {
+                   country  = input;
+                }
+            }
+            while (!resParse);
+        }
+        private void GetYourStreet()
+        {
+            bool resParse = false;
+
+            do
+            {
+                Console.Write("Write your street: ");
+                string input = Console.ReadLine();
+                resParse = !string.IsNullOrWhiteSpace(input);
+                if (resParse)
+                {
+                    street = input;
+                }
+            }
+            while (!resParse);
+        }
+        private void GetYourCity()
+        {
+            bool resParse = false;
+
+            do
+            {
+                Console.Write("Write your city: ");
+                string input = Console.ReadLine();
+                resParse = !string.IsNullOrWhiteSpace(input);
+                if (resParse)
+                {
+                    city = input;
+                }
+            }
+            while (!resParse);
+        }
+        private void GetYourIndex()
+        {
+            bool resParse = false;
+            do
+            {
+                Console.Write("Write your index: ");
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out index);
+            }
+            while (!resParse || index < 1111 || index > 9999);
+        }
+        private void GetYourHouse()
+        {
+            bool resParse = false;
+            do
+            {
+                Console.Write("Write your house: ");
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out house);
+            }
+            while (!resParse || house < 1 || house > 400);
+        }
+        private void GetYourApartment()
+        {
+            bool resParse = false;
+            do
+            {
+                Console.Write("Write your apartment: ");
+                string input = Console.ReadLine();
+                resParse = int.TryParse(input, out apartment);
+            }
+            while (!resParse || apartment < 1 || apartment > 150);
+        }
+        public void GetFullAdress()
+        {
+            GetYourIndex();
+            Console.Clear();
+            GetYourCountry();
+            Console.Clear();
+            GetYourCity();
+            Console.Clear();
+            GetYourStreet();
+            Console.Clear();
+            GetYourHouse();
+            Console.Clear();
+            GetYourApartment();
+            Console.Clear();
+        }
+
+        public void WriteAdress()
+        {
+            Console.WriteLine($"Your adress: {index}, {country}, {city}, {street}, {house}|{apartment}");
+            
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+
+            Address address = new Address()
+            {
+                Index = 1789,
+                Country = "Ukraine",
+                City = "Dnipro",
+                Street = "Main Street",
+                House = 123,
+                Apartment = 45
+            };
+            address.WriteAdress();
+
+            Console.ReadLine();
+
+            Console.Clear();
+
+            Address address1 = new Address();
+            address1.GetFullAdress();
+            address1.WriteAdress();
+            Console.ReadLine();
+        }
+    }
+}
